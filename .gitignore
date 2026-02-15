@@ -34,3 +34,4 @@ data/
 
 # drizzle
 /drizzle/
+package-lock.json

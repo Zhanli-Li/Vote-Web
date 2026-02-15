@@ -43,6 +43,8 @@ export default function HomePage() {
         setSubmissions(data);
         setCurrentIndex(0);
         setVoteResult(null);
+      } else {
+        toast.error("加载失败");
       }
     } catch {
       toast.error("加载失败");
