@@ -38,7 +38,7 @@ interface Props {
     totalStudents: number;
     awards: AwardDisplay[];
     research: ResearchDisplay[];
-    otherInfo: string | null;
+    otherInfo: Record<string, string> | null;
     targetSchool?: TargetSchoolDisplay | null;
     targetSchools?: TargetSchoolDisplay[];
   };
@@ -47,6 +47,7 @@ interface Props {
 
 export function SubmissionCard({ submission, children }: Props) {
   const pct = ((submission.rank / submission.totalStudents) * 100).toFixed(1);
+  const info = submission.otherInfo;
 
   return (
     <Card>
@@ -61,6 +62,9 @@ export function SubmissionCard({ submission, children }: Props) {
             </span>
           )}
         </div>
+        {info?.school && (
+          <p className="text-sm text-muted-foreground mt-1">{info.school}</p>
+        )}
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
@@ -70,9 +74,12 @@ export function SubmissionCard({ submission, children }: Props) {
               ({pct}%)
             </span>
           </p>
+          {info?.ranking && (
+            <p className="text-sm text-muted-foreground mt-1">{info.ranking}</p>
+          )}
         </div>
 
-        {submission.awards.length > 0 && (
+        {(submission.awards.length > 0 || info?.awards) && (
           <>
             <Separator />
             <div>
@@ -95,11 +102,14 @@ export function SubmissionCard({ submission, children }: Props) {
                   </div>
                 ))}
               </div>
+              {info?.awards && (
+                <p className="text-sm text-muted-foreground mt-2">{info.awards}</p>
+              )}
             </div>
           </>
         )}
 
-        {submission.research.length > 0 && (
+        {(submission.research.length > 0 || info?.research) && (
           <>
             <Separator />
             <div>
@@ -132,7 +142,6 @@ export function SubmissionCard({ submission, children }: Props) {
                         方向：{r.direction}
                       </p>
                     )}
-                    {/* Legacy fields */}
                     {r.title && <span className="font-medium">{r.title}</span>}
                     {r.description && (
                       <p className="text-muted-foreground text-xs">
@@ -142,18 +151,9 @@ export function SubmissionCard({ submission, children }: Props) {
                   </div>
                 ))}
               </div>
-            </div>
-          </>
-        )}
-
-        {submission.otherInfo && (
-          <>
-            <Separator />
-            <div>
-              <p className="text-sm font-medium mb-1">其他</p>
-              <p className="text-sm text-muted-foreground">
-                {submission.otherInfo}
-              </p>
+              {info?.research && (
+                <p className="text-sm text-muted-foreground mt-2">{info.research}</p>
+              )}
             </div>
           </>
         )}
@@ -181,6 +181,9 @@ export function SubmissionCard({ submission, children }: Props) {
                   </span>
                 )}
               </div>
+              {info?.target && (
+                <p className="text-sm text-muted-foreground mt-2">{info.target}</p>
+              )}
             </div>
           </>
         )}

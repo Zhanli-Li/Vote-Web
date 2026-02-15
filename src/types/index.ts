@@ -29,7 +29,7 @@ export interface SubmissionFormData {
   totalStudents: number;
   awards: Award[];
   research: Research[];
-  otherInfo?: string;
+  otherInfo?: Record<string, string>;
   targetSchool?: TargetSchool;
 }
 
@@ -41,7 +41,7 @@ export interface SubmissionWithVotes {
   totalStudents: number;
   awards: Award[];
   research: Research[];
-  otherInfo: string | null;
+  otherInfo: Record<string, string> | null;
   targetSchool: TargetSchool | null;
   createdAt: string;
   votes: {

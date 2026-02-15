@@ -2,12 +2,15 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 interface Props {
   rank: string;
   totalStudents: string;
   onRankChange: (value: string) => void;
   onTotalStudentsChange: (value: string) => void;
+  otherInfo: string;
+  onOtherInfoChange: (value: string) => void;
 }
 
 export function RankingSection({
@@ -15,6 +18,8 @@ export function RankingSection({
   totalStudents,
   onRankChange,
   onTotalStudentsChange,
+  otherInfo,
+  onOtherInfoChange,
 }: Props) {
   return (
     <div className="space-y-4">
@@ -44,6 +49,15 @@ export function RankingSection({
           {((parseInt(rank) / parseInt(totalStudents)) * 100).toFixed(1)}%
         </p>
       )}
+      <div className="space-y-2">
+        <Label>其他信息（选填）</Label>
+        <Textarea
+          placeholder="关于排名的补充说明"
+          value={otherInfo}
+          onChange={(e) => onOtherInfoChange(e.target.value)}
+          rows={2}
+        />
+      </div>
     </div>
   );
 }

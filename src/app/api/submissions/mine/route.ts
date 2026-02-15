@@ -38,6 +38,7 @@ export async function GET() {
       ...s,
       awards: JSON.parse(s.awards),
       research: JSON.parse(s.research),
+      otherInfo: s.otherInfo ? JSON.parse(s.otherInfo) : null,
       targetSchool: JSON.parse(s.targetSchools),
       votes: voteCounts,
     };

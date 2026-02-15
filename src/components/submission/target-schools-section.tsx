@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -15,9 +16,11 @@ import type { TargetSchool } from "@/types";
 interface Props {
   target: TargetSchool;
   onChange: (target: TargetSchool) => void;
+  otherInfo: string;
+  onOtherInfoChange: (value: string) => void;
 }
 
-export function TargetSchoolSection({ target, onChange }: Props) {
+export function TargetSchoolSection({ target, onChange, otherInfo, onOtherInfoChange }: Props) {
   function update(field: keyof TargetSchool, value: string) {
     onChange({ ...target, [field]: value });
   }
@@ -74,6 +77,15 @@ export function TargetSchoolSection({ target, onChange }: Props) {
           placeholder="任意"
           value={target.direction === "任意" ? "" : target.direction}
           onChange={(e) => update("direction", e.target.value || "任意")}
+        />
+      </div>
+      <div className="space-y-2">
+        <Label>其他信息（选填）</Label>
+        <Textarea
+          placeholder="关于意向的补充说明"
+          value={otherInfo}
+          onChange={(e) => onOtherInfoChange(e.target.value)}
+          rows={2}
         />
       </div>
     </div>

@@ -18,7 +18,7 @@ interface Submission {
   totalStudents: number;
   awards: Array<{ category: string; name: string; level: string }>;
   research: Array<{ title: string; description: string }>;
-  otherInfo: string | null;
+  otherInfo: Record<string, string> | null;
   targetSchool: { name?: string; tier: string; advisor?: string; direction?: string } | null;
 }
 

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -17,9 +18,11 @@ import { Plus, X } from "lucide-react";
 interface Props {
   awards: Award[];
   onChange: (awards: Award[]) => void;
+  otherInfo: string;
+  onOtherInfoChange: (value: string) => void;
 }
 
-export function AwardsSection({ awards, onChange }: Props) {
+export function AwardsSection({ awards, onChange, otherInfo, onOtherInfoChange }: Props) {
   function addAward() {
     onChange([
       ...awards,
@@ -127,6 +130,15 @@ export function AwardsSection({ awards, onChange }: Props) {
         <Plus className="h-4 w-4 mr-2" />
         添加获奖
       </Button>
+      <div className="space-y-2">
+        <Label>其他信息（选填）</Label>
+        <Textarea
+          placeholder="关于获奖的补充说明"
+          value={otherInfo}
+          onChange={(e) => onOtherInfoChange(e.target.value)}
+          rows={2}
+        />
+      </div>
     </div>
   );
 }

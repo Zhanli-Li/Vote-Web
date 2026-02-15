@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SchoolSection } from "./school-section";
 import { RankingSection } from "./ranking-section";
@@ -24,7 +22,7 @@ export function SubmissionForm() {
   const [totalStudents, setTotalStudents] = useState("");
   const [awards, setAwards] = useState<Award[]>([]);
   const [research, setResearch] = useState<Research[]>([]);
-  const [otherInfo, setOtherInfo] = useState("");
+  const [otherInfo, setOtherInfo] = useState<Record<string, string>>({});
   const [targetSchool, setTargetSchool] = useState<TargetSchool>({
     tier: "",
     advisor: "任意",
@@ -57,7 +55,7 @@ export function SubmissionForm() {
           totalStudents: parseInt(totalStudents),
           awards,
           research,
-          otherInfo: otherInfo || undefined,
+          otherInfo: Object.values(otherInfo).some((v) => v) ? otherInfo : undefined,
           targetSchool: targetSchool.tier ? targetSchool : undefined,
         }),
       });
@@ -92,6 +90,8 @@ export function SubmissionForm() {
             schoolName={schoolName}
             onSchoolTierChange={setSchoolTier}
             onSchoolNameChange={setSchoolName}
+            otherInfo={otherInfo.school || ""}
+            onOtherInfoChange={(v) => setOtherInfo({ ...otherInfo, school: v })}
           />
         </TabsContent>
         <TabsContent value="ranking" className="mt-4">
@@ -100,31 +100,35 @@ export function SubmissionForm() {
             totalStudents={totalStudents}
             onRankChange={setRank}
             onTotalStudentsChange={setTotalStudents}
+            otherInfo={otherInfo.ranking || ""}
+            onOtherInfoChange={(v) => setOtherInfo({ ...otherInfo, ranking: v })}
           />
         </TabsContent>
         <TabsContent value="awards" className="mt-4">
-          <AwardsSection awards={awards} onChange={setAwards} />
+          <AwardsSection
+            awards={awards}
+            onChange={setAwards}
+            otherInfo={otherInfo.awards || ""}
+            onOtherInfoChange={(v) => setOtherInfo({ ...otherInfo, awards: v })}
+          />
         </TabsContent>
         <TabsContent value="research" className="mt-4">
-          <ResearchSection research={research} onChange={setResearch} />
+          <ResearchSection
+            research={research}
+            onChange={setResearch}
+            otherInfo={otherInfo.research || ""}
+            onOtherInfoChange={(v) => setOtherInfo({ ...otherInfo, research: v })}
+          />
         </TabsContent>
         <TabsContent value="target" className="mt-4">
           <TargetSchoolSection
             target={targetSchool}
             onChange={setTargetSchool}
+            otherInfo={otherInfo.target || ""}
+            onOtherInfoChange={(v) => setOtherInfo({ ...otherInfo, target: v })}
           />
         </TabsContent>
       </Tabs>
-
-      <div className="space-y-2">
-        <Label>其他信息（选填）</Label>
-        <Textarea
-          placeholder="任何你想补充的信息"
-          value={otherInfo}
-          onChange={(e) => setOtherInfo(e.target.value)}
-          rows={3}
-        />
-      </div>
 
       <Button
         onClick={handleSubmit}

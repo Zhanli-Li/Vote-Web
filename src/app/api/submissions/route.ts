@@ -39,6 +39,7 @@ export async function GET() {
     ...s,
     awards: JSON.parse(s.awards),
     research: JSON.parse(s.research),
+    otherInfo: s.otherInfo ? JSON.parse(s.otherInfo) : null,
     targetSchool: JSON.parse(s.targetSchools),
   }));
 
@@ -77,7 +78,7 @@ export async function POST(request: NextRequest) {
       totalStudents,
       awards: JSON.stringify(awards || []),
       research: JSON.stringify(research || []),
-      otherInfo: otherInfo || null,
+      otherInfo: otherInfo ? JSON.stringify(otherInfo) : null,
       targetSchools: JSON.stringify(targetSchool || null),
     })
     .returning()

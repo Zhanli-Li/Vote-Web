@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -16,6 +17,8 @@ interface Props {
   schoolName: string;
   onSchoolTierChange: (value: string) => void;
   onSchoolNameChange: (value: string) => void;
+  otherInfo: string;
+  onOtherInfoChange: (value: string) => void;
 }
 
 export function SchoolSection({
@@ -23,6 +26,8 @@ export function SchoolSection({
   schoolName,
   onSchoolTierChange,
   onSchoolNameChange,
+  otherInfo,
+  onOtherInfoChange,
 }: Props) {
   return (
     <div className="space-y-4">
@@ -47,6 +52,15 @@ export function SchoolSection({
           placeholder="例如：北京大学"
           value={schoolName}
           onChange={(e) => onSchoolNameChange(e.target.value)}
+        />
+      </div>
+      <div className="space-y-2">
+        <Label>其他信息（选填）</Label>
+        <Textarea
+          placeholder="关于学校的补充说明"
+          value={otherInfo}
+          onChange={(e) => onOtherInfoChange(e.target.value)}
+          rows={2}
         />
       </div>
     </div>

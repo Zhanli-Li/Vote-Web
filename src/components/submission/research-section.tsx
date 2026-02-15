@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -21,9 +22,11 @@ import { Plus, X } from "lucide-react";
 interface Props {
   research: Research[];
   onChange: (research: Research[]) => void;
+  otherInfo: string;
+  onOtherInfoChange: (value: string) => void;
 }
 
-export function ResearchSection({ research, onChange }: Props) {
+export function ResearchSection({ research, onChange, otherInfo, onOtherInfoChange }: Props) {
   function addResearch() {
     onChange([
       ...research,
@@ -157,6 +160,15 @@ export function ResearchSection({ research, onChange }: Props) {
         <Plus className="h-4 w-4 mr-2" />
         添加科研成果
       </Button>
+      <div className="space-y-2">
+        <Label>其他信息（选填）</Label>
+        <Textarea
+          placeholder="关于科研的补充说明"
+          value={otherInfo}
+          onChange={(e) => onOtherInfoChange(e.target.value)}
+          rows={2}
+        />
+      </div>
     </div>
   );
 }
