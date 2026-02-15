@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import type { VoteOption } from "@/lib/constants";
 import { toast } from "sonner";
+import { RefreshCw } from "lucide-react";
 
 interface Submission {
   id: number;
@@ -128,9 +129,19 @@ export default function HomePage() {
       <div className="max-w-2xl mx-auto px-4">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">投票</h1>
-          <span className="text-sm text-muted-foreground">
-            {currentIndex + 1}/{submissions.length}
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-muted-foreground">
+              {currentIndex + 1}/{submissions.length}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8"
+              onClick={fetchSubmissions}
+            >
+              <RefreshCw className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
 
         <SubmissionCard submission={current}>
