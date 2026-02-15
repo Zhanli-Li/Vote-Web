@@ -3,6 +3,8 @@ import { db } from "@/db";
 import { users, submissions, votes } from "@/db/schema";
 import { eq, inArray } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ hash: string }> }

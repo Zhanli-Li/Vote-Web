@@ -37,12 +37,14 @@ export default function HomePage() {
   const fetchSubmissions = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/submissions");
+      const res = await fetch("/api/submissions", { cache: "no-store" });
       if (res.ok) {
         const data = await res.json();
         setSubmissions(data);
         setCurrentIndex(0);
         setVoteResult(null);
+      } else {
+        toast.error("加载失败");
       }
     } catch {
       toast.error("加载失败");

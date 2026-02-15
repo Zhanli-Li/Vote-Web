@@ -13,7 +13,7 @@ export default function MyPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/submissions/mine")
+    fetch("/api/submissions/mine", { cache: "no-store" })
       .then((res) => res.json())
       .then(setSubmissions)
       .catch(() => toast.error("加载失败"))

@@ -4,6 +4,8 @@ import { submissions, votes } from "@/db/schema";
 import { getUserHash } from "@/lib/auth";
 import { eq, and, sql } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

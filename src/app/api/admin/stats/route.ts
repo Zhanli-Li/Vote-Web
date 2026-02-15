@@ -3,6 +3,8 @@ import { db } from "@/db";
 import { users, submissions, votes } from "@/db/schema";
 import { sql, gte } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const userCount = db
     .select({ count: sql<number>`count(*)` })
