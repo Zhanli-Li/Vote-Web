@@ -38,7 +38,7 @@ export async function GET() {
       ...s,
       awards: JSON.parse(s.awards),
       research: JSON.parse(s.research),
-      targetSchools: JSON.parse(s.targetSchools),
+      targetSchool: JSON.parse(s.targetSchools),
       votes: voteCounts,
     };
   });

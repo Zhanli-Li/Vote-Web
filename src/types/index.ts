@@ -30,7 +30,7 @@ export interface SubmissionFormData {
   awards: Award[];
   research: Research[];
   otherInfo?: string;
-  targetSchools: TargetSchool[];
+  targetSchool?: TargetSchool;
 }
 
 export interface SubmissionWithVotes {
@@ -42,7 +42,7 @@ export interface SubmissionWithVotes {
   awards: Award[];
   research: Research[];
   otherInfo: string | null;
-  targetSchools: TargetSchool[];
+  targetSchool: TargetSchool | null;
   createdAt: string;
   votes: {
     OQ: number;

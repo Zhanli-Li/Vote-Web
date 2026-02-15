@@ -39,7 +39,7 @@ export async function GET() {
     ...s,
     awards: JSON.parse(s.awards),
     research: JSON.parse(s.research),
-    targetSchools: JSON.parse(s.targetSchools),
+    targetSchool: JSON.parse(s.targetSchools),
   }));
 
   return NextResponse.json(parsed);
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     awards,
     research,
     otherInfo,
-    targetSchools,
+    targetSchool,
   } = body;
 
   if (!schoolTier || !rank || !totalStudents) {
@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
       awards: JSON.stringify(awards || []),
       research: JSON.stringify(research || []),
       otherInfo: otherInfo || null,
-      targetSchools: JSON.stringify(targetSchools || []),
+      targetSchools: JSON.stringify(targetSchool || null),
     })
     .returning()
     .get();

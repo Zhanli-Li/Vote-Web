@@ -39,7 +39,8 @@ interface Props {
     awards: AwardDisplay[];
     research: ResearchDisplay[];
     otherInfo: string | null;
-    targetSchools: TargetSchoolDisplay[];
+    targetSchool?: TargetSchoolDisplay | null;
+    targetSchools?: TargetSchoolDisplay[];
   };
   children?: React.ReactNode;
 }
@@ -157,30 +158,28 @@ export function SubmissionCard({ submission, children }: Props) {
           </>
         )}
 
-        {submission.targetSchools.length > 0 && (
+        {submission.targetSchool && (
           <>
             <Separator />
             <div>
-              <p className="text-sm font-medium mb-2">意向学校</p>
-              <div className="space-y-1.5">
-                {submission.targetSchools.map((s, i) => (
-                  <div key={i} className="flex items-center gap-2 text-sm flex-wrap">
-                    <Badge variant="secondary" className="text-xs">
-                      {s.tier}
-                    </Badge>
-                    {s.name && <span>{s.name}</span>}
-                    {s.advisor && s.advisor !== "任意" && (
-                      <span className="text-muted-foreground text-xs">
-                        {s.advisor}
-                      </span>
-                    )}
-                    {s.direction && s.direction !== "任意" && (
-                      <span className="text-muted-foreground text-xs">
-                        {s.direction}
-                      </span>
-                    )}
-                  </div>
-                ))}
+              <p className="text-sm font-medium mb-2">意向</p>
+              <div className="flex items-center gap-2 text-sm flex-wrap">
+                <Badge variant="secondary" className="text-xs">
+                  {submission.targetSchool.tier}
+                </Badge>
+                {submission.targetSchool.name && (
+                  <span>{submission.targetSchool.name}</span>
+                )}
+                {submission.targetSchool.advisor && submission.targetSchool.advisor !== "任意" && (
+                  <span className="text-muted-foreground text-xs">
+                    {submission.targetSchool.advisor}
+                  </span>
+                )}
+                {submission.targetSchool.direction && submission.targetSchool.direction !== "任意" && (
+                  <span className="text-muted-foreground text-xs">
+                    {submission.targetSchool.direction}
+                  </span>
+                )}
               </div>
             </div>
           </>

@@ -10,7 +10,7 @@ import { SchoolSection } from "./school-section";
 import { RankingSection } from "./ranking-section";
 import { AwardsSection } from "./awards-section";
 import { ResearchSection } from "./research-section";
-import { TargetSchoolsSection } from "./target-schools-section";
+import { TargetSchoolSection } from "./target-schools-section";
 import type { Award, Research, TargetSchool } from "@/types";
 import { toast } from "sonner";
 
@@ -25,7 +25,11 @@ export function SubmissionForm() {
   const [awards, setAwards] = useState<Award[]>([]);
   const [research, setResearch] = useState<Research[]>([]);
   const [otherInfo, setOtherInfo] = useState("");
-  const [targetSchools, setTargetSchools] = useState<TargetSchool[]>([]);
+  const [targetSchool, setTargetSchool] = useState<TargetSchool>({
+    tier: "",
+    advisor: "任意",
+    direction: "任意",
+  });
 
   async function handleSubmit() {
     if (!schoolTier) {
@@ -54,7 +58,7 @@ export function SubmissionForm() {
           awards,
           research,
           otherInfo: otherInfo || undefined,
-          targetSchools,
+          targetSchool: targetSchool.tier ? targetSchool : undefined,
         }),
       });
 
@@ -105,9 +109,9 @@ export function SubmissionForm() {
           <ResearchSection research={research} onChange={setResearch} />
         </TabsContent>
         <TabsContent value="target" className="mt-4">
-          <TargetSchoolsSection
-            targetSchools={targetSchools}
-            onChange={setTargetSchools}
+          <TargetSchoolSection
+            target={targetSchool}
+            onChange={setTargetSchool}
           />
         </TabsContent>
       </Tabs>

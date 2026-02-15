@@ -60,7 +60,7 @@ export async function GET(
     ...submission,
     awards: JSON.parse(submission.awards),
     research: JSON.parse(submission.research),
-    targetSchools: JSON.parse(submission.targetSchools),
+    targetSchool: JSON.parse(submission.targetSchools),
     votes: voteCounts,
     myVote: myVote?.vote || null,
   });

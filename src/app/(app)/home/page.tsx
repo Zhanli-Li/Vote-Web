@@ -18,7 +18,7 @@ interface Submission {
   awards: Array<{ category: string; name: string; level: string }>;
   research: Array<{ title: string; description: string }>;
   otherInfo: string | null;
-  targetSchools: Array<{ name: string; tier: string }>;
+  targetSchool: { name?: string; tier: string; advisor?: string; direction?: string } | null;
 }
 
 interface VoteResult {
