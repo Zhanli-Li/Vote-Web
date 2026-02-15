@@ -5,6 +5,8 @@ import { getUserHash } from "@/lib/auth";
 import { eq } from "drizzle-orm";
 import { calculateScore, getTotalVotes } from "@/lib/score";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const userHash = await getUserHash();
   if (!userHash) {

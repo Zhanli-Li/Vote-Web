@@ -3,6 +3,8 @@ import { db } from "@/db";
 import { users, submissions, votes } from "@/db/schema";
 import { sql, eq } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const userList = db
     .select({
